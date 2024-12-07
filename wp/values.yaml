@@ -1,0 +1,29 @@
+wp:
+  name: wp-app
+  labels:
+    id: c0905643
+    app: wp
+    env: dev
+  image:
+    repository: wordpress
+    tag: latest
+    pullPolicy: IfNotPresent
+  replicas: 1
+  rollingUpdate:
+    maxSurge: 1
+    maxUnavailable: 1
+  resources:
+    requests:
+      cpu: "150m"
+      memory: "128Mi"
+    limits:
+      cpu: "250m"
+      memory: "256Mi"
+  configmap:
+    ## KEY: "value"
+    WORDPRESS_DB_HOST: "wp-database.db.svc.cluster.local:3306"
+    WORDPRESS_DB_USER: wordpress
+    WORDPRESS_DB_NAME: wordpress
+    APP_ENV: dev
+  containerPorts:
+      http: 80

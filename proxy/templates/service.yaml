@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.proxy.name }}
+  namespace: proxy
+  labels:
+{{- toYaml .Values.proxy.labels | nindent 4 }}
+spec:
+  type: LoadBalancer
+  ports:
+  - port: {{ .Values.proxy.port }}
+    targetPort: {{ .Values.proxy.containerPorts.nginx }}
+    protocol: TCP
+  selector:
+{{- toYaml .Values.proxy.labels | nindent 4 }}

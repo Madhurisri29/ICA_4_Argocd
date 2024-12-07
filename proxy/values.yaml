@@ -1,0 +1,14 @@
+proxy:
+  name: nginx
+  labels:
+    id: c0905643
+    app: nginx-proxy
+    env: dev
+  port: 80
+  image:
+    repository: nginx
+    tag: latest
+    pullPolicy: IfNotPresent
+  replicas: 1
+  containerPorts:
+    nginx: 80
